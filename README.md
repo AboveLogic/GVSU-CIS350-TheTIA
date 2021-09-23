@@ -6,7 +6,7 @@ Our goal is to create a functional workout/gym companion app. We expect to have 
 ## Team Members and Roles
 
 * [Travis Post](https://github.com/AboveLogic/CIS350-HW-2) 
-* Member 2 (Role 3, Role 4)
+* [Ian O'Strander](https://github.com/IanO12/CIS350-HW2-O-Strander)
 * Member 3 (Role 5, Role 6)
 
 ## Prerequisites
