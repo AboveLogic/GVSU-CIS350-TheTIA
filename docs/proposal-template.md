@@ -15,13 +15,24 @@ If we have extra time on the project there are several extra features we would l
 1. GitHub/Git
 2. A Java capable IDE 
 
-# Method/Apporach
- estimated "plan of attack" for developing this project)
+# Method/Approach
+ 
+ We are choosing to use the scrum method. We plan to use GitHub's features as our scrum board. Our weekly schedule will be broken down into smaller tasks based on the goal for that week. Each person will choose a task until they are completed and then help the others. We are going to have two team members focused on functionality and one member focused on stylistic improvements.  
 
 # Estimated Timeline
 
-(Figure out what your major milestones for this project will be, including how long you anticipate it *may* take to reach that point)
+1. Home Page (first-second week)
+2. Begin Exercise Library and premade workouts (third week)
+3. Add create your own routine function (fourth-fifth week)
+4. Add reps/sets that user inputs and rest time/timer (sixth week)
+5. Add search function with tagged workouts (eg. arms, pull) (seventh)
+6. Add a calendar to schedule workouts (eighth-ninth week)
+7. Add save feature (ninth-tenth week)
+8. IF TIME: add social media sharing and music player (remaining time)
+
 
 # Anticipated Problems
-
-(Describe any problems you foresee that you will need to overcome)
+1. Overall inexperience in app development
+2. Inexperience with using git in a group setting
+3. Inexperience with extensive programming/large projects 
+4. Concern over deadline/meeting requirements 
