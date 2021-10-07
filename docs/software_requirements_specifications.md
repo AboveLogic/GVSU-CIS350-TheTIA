@@ -28,13 +28,19 @@ Description
 
 #Non-Functional Requirements
 1. Load Times
-    1. Load times between screens shall not exceed two seconds
-    2. Login time shall not exceed three seconds
-    3. Saved workouts shall be accessible at any time and load in under 4 seconds
-    4.
-2.
-3.
-4.
+    1. Load times shall not exceed two seconds when transitioning between screens on the application.
+    2. Successful login time shall not exceed three seconds.
+    3. Saved workouts shall be accessible at any time and load in under 4 seconds.
+    4. The search function shall return all tagged results within four seconds.
+2. Login Function
+    1. The login function shall deny users until a successful combination of username and password is entered.
+    2. 
+    3.
+3. Search Function
+    1. 
+    2.
+    3.
+
 
 
 
