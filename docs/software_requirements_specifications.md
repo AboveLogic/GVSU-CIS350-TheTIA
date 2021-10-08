@@ -20,6 +20,7 @@ Description
 5. Create Your Own Workour Function
     1. Users shall be able to choose from the entire library of workouts to compile their own unique workouts. 
     2. Users shall be able to use the search function to help them find workouts
+
 #Non-Functional Requirements
 1. Load Times
     1. Load times shall not exceed two seconds when transitioning between screens on the application.
