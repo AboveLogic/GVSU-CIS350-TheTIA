@@ -3,7 +3,7 @@
 * Name: Login Screen
 * Description: Create the first screen that the user sees, where they are prompted to enter their username and password, or create an account. 
 * Expected time to complete: One Week
-* Responsible: Alexandra MacKay and Travis Post
+* Responsible: Alexandra MacKay and Travis Post  
 
 * Name: Search function
 * Description: Create a search function that the user can lookup specific exercises by name or tag
