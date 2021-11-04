@@ -1,0 +1,68 @@
+<LoginWindow>:
+    name:"login"
+    MDCard:
+        size_hint: None, None
+        size: root.width, root.height
+        padding: 25
+        spacing: 25
+        orientation:'vertical'
+
+        MDLabel:
+            id: welcome_label
+            text: "Welcome to Smart Strength!\nPlease Enter Your Email and Password"
+            font_size: 40
+            halign: 'center'
+            size_hint_y: None
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        MDLabel:
+            id: invalid_label
+            color: 1,0,0,1
+            text: ""
+            font_size: 20
+            halign: 'center'
+            size_hint_y: None
+        MDTextFieldRound:
+            id:user
+            hint_text: "email"
+            icon_right: "account"
+            size_int_x: None
+            width: 200
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+
+        MDTextFieldRound:
+            id:password
+            hint_text: "password"
+            icon_right: "eye-off"
+            size_int_x: None
+            width: 200
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            password: True
+
+        MDRoundFlatButton:
+            text: "LOGIN"
+            font_size: 12
+            pos_hint: {"center_x": 0.5}
+            on_press:
+                if root.login(): app.root.current="main"; root.manager.transition.direction="left"
+                else: root.clear();
+
+
+        MDRoundFlatButton:
+            text: "CLEAR"
+            font_size: 12
+            pos_hint: {"center_x": 0.5}
+            on_press: root.clear()
+
+        MDRoundFlatButton:
+            text: "CREATE AN ACCOUNT"
+            font_size: 12
+            pos_hint: {"center_x": 0.5}
+            on_press:
+                app.root.current = "signup"
+                root.manager.transition.direction="left"
+        MDLabel:
+            text: ""
+            size_hint_y: None
+

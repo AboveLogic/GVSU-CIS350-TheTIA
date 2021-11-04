@@ -1,0 +1,33 @@
+<Button>
+    size_hint: (.5,.5)
+    pos_hint: {"center_x": .5,"center_y": .5}
+ScrollableLabel:
+<MainWindow>:
+    name:"main"
+    GridLayout:
+        rows:3
+        GridLayout:
+            cols: 3
+            Button:
+                text: "Settings"
+            Button:
+                background_normal : 'SmartStrength.png'
+            Button:
+                text: "Profile"
+        GridLayout:
+            cols: 1
+            size_hint_y:5
+            Image:
+                source: 'SmartStrength.png'
+        GridLayout:
+            cols: 4
+            Button:
+                text: "Home"
+            Button:
+                text: "Favorite"
+            Button:
+                text: "Upload"
+            Button:
+                text: "Explore"
+
+
