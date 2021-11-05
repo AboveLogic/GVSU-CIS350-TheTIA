@@ -55,15 +55,17 @@ class MainWindow(Screen):
 class WindowManager(ScreenManager):
   pass
 
-firebaseConfig={'apiKey': "AIzaSyBXuwuHpegF_nDPc1JsrMG1f8EaEit7-XI",
-  'authDomain': "pyrebase-6e06e.firebaseapp.com",
-  'databaseURL':"https://pyrebase-6e06e-default-rtdb.firebaseio.com/",
-  'projectId': "pyrebase-6e06e",
-  'storageBucket': "pyrebase-6e06e.appspot.com",
-  'messagingSenderId': "156655911418",
-  'appId': "1:156655911418:web:e95408e1e82fd4389c2443",
-  'measurementId': "G-RJ9JQWP5LK"}
 
+firebaseConfig = {
+  'apiKey': "AIzaSyCLaRtvwLMheJOJU2BrRtRAef_ogPn0yrQ",
+  'authDomain': "smartstrength-ae966.firebaseapp.com",
+  'databaseURL': "https://smartstrength-ae966-default-rtdb.firebaseio.com",
+  'projectId': "smartstrength-ae966",
+  'storageBucket': "smartstrength-ae966.appspot.com",
+  'messagingSenderId': "910004572815",
+  'appId': "1:910004572815:web:0d379a3035a6c5f2ddd6fa",
+  'measurementId': "G-N3QTMB57PK"
+}
 firebase = pyrebase.initialize_app(firebaseConfig)
 
 class KivyApp(MDApp):
