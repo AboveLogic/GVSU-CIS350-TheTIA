@@ -1,7 +1,6 @@
 <Button>
     size_hint: (.5,.5)
     pos_hint: {"center_x": .5,"center_y": .5}
-ScrollableLabel:
 <MainWindow>:
     name:"main"
     GridLayout:
@@ -14,6 +13,7 @@ ScrollableLabel:
                 background_normal : 'SmartStrength.png'
             Button:
                 text: "Profile"
+                on_press: root.userId()
         GridLayout:
             cols: 1
             size_hint_y:5
