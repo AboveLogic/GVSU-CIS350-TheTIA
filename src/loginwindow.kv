@@ -44,7 +44,7 @@
             text: "LOGIN"
             font_size: 12
             pos_hint: {"center_x": 0.5}
-            on_press:
+            on_release:
                 if root.login(): app.root.current="main"; root.manager.transition.direction="left"
                 else: root.clear();
 
@@ -53,13 +53,13 @@
             text: "CLEAR"
             font_size: 12
             pos_hint: {"center_x": 0.5}
-            on_press: root.clear()
+            on_release: root.clear()
 
         MDRoundFlatButton:
             text: "CREATE AN ACCOUNT"
             font_size: 12
             pos_hint: {"center_x": 0.5}
-            on_press:
+            on_release:
                 app.root.current = "signup"
                 root.manager.transition.direction="left"
         MDLabel:

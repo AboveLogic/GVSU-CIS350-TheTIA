@@ -1,15 +1,13 @@
-import urllib
-from time import sleep
 
 import pyrebase
 from kivy.lang import Builder
+from kivy.uix.button import Button
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.core.window import Window
 from firebase_admin import firestore
 import firebase_admin
 from firebase_admin import credentials
-
 cred = credentials.Certificate("serviceAccountKey.json")
 firebase_admin.initialize_app(cred)
 userdb = firestore.client()
@@ -68,7 +66,6 @@ class SignUpWindow(Screen):
 class MainWindow(Screen):
   def userId(self):
     print(auth.current_user['localId'])
-
 class WindowManager(ScreenManager):
   pass
 
@@ -77,7 +74,6 @@ class KivyApp(MDApp):
     self.theme_cls.theme_style = "Dark"
     self.theme_cls.primary_palette = "BlueGray"
     return Builder.load_file('new_window.kv')
-
 if __name__ == '__main__':
     KivyApp().run()
 

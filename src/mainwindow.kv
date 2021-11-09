@@ -10,25 +10,84 @@
             Button:
                 text: "Settings"
             Button:
-                background_normal : 'SmartStrength.png'
+                Image:
+                    id: Home
+                    source: 'SmartStrength.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
             Button:
                 text: "Profile"
-                on_press: root.userId()
-        GridLayout:
-            cols: 1
-            size_hint_y:5
-            Image:
-                source: 'SmartStrength.png'
+                on_release: root.userId()
+        ScrollView:
+            size: self.size
+            size_hint_y: 5
+            GridLayout:
+                size_hint_y: None
+                height: self.minimum_height
+                width: self.minimum_width
+                cols: 1
+                spacing: "20dp"
+                padding: "20dp"
+
+                MDCard:
+                    orientation: "vertical"
+                    padding: "8dp"
+                    size_hint: 1,None
+                    height: "210dp"
+                    elevation_radius: 20
+                    radius: [15]
+                MDCard:
+                    orientation: "vertical"
+                    padding: "8dp"
+                    size_hint: 1,None
+                    height: "210dp"
+                    elevation_radius: 20
+                    radius: [15]
+                MDCard:
+                    orientation: "vertical"
+                    padding: "8dp"
+                    size_hint: 1,None
+                    height: "210dp"
+                    elevation_radius: 20
+                    radius: [15]
+                MDCard:
+                    orientation: "vertical"
+                    padding: "8dp"
+                    size_hint: 1,None
+                    height: "210dp"
+                    elevation_radius: 20
+                    radius: [15]
+
         GridLayout:
             cols: 4
             Button:
-                text: "Home"
+                background_color: 0,0,0,0
+                Image:
+                    id: Home
+                    source: 'icons\Home-icon.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
             Button:
-                text: "Favorite"
+                background_color: 0,0,0,0
+                Image:
+                    id: Home
+                    source: 'icons\Heart.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
             Button:
-                text: "Upload"
+                background_color: 0,0,0,0
+                Image:
+                    id: Home
+                    source: 'icons\Plus.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
             Button:
-                text: "Explore"
+                background_color: 0,0,0,0
+                Image:
+                    id: Home
+                    source: 'icons\Magnify.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
 
 
 
