@@ -1,8 +1,12 @@
 <Button>
     size_hint: (.5,.5)
     pos_hint: {"center_x": .5,"center_y": .5}
+<SearchBar>:
+<Something>:
 <MainWindow>:
+
     name:"main"
+
     GridLayout:
         rows:3
         GridLayout:
@@ -19,44 +23,25 @@
                 text: "Profile"
                 on_release: root.userId()
         ScrollView:
+            id: some
             size: self.size
             size_hint_y: 5
             GridLayout:
+                id: widget_list
                 size_hint_y: None
                 height: self.minimum_height
                 width: self.minimum_width
                 cols: 1
-                spacing: "20dp"
-                padding: "20dp"
+                spacing: 50
+                padding: 50
+                MDTextField:
+                    id:search
+                    hint_text: "search"
+                    size_int_x: None
+                    width: 200
+                    font_size: 18
+                    pos_hint: {"center_x": 0.5}
 
-                MDCard:
-                    orientation: "vertical"
-                    padding: "8dp"
-                    size_hint: 1,None
-                    height: "210dp"
-                    elevation_radius: 20
-                    radius: [15]
-                MDCard:
-                    orientation: "vertical"
-                    padding: "8dp"
-                    size_hint: 1,None
-                    height: "210dp"
-                    elevation_radius: 20
-                    radius: [15]
-                MDCard:
-                    orientation: "vertical"
-                    padding: "8dp"
-                    size_hint: 1,None
-                    height: "210dp"
-                    elevation_radius: 20
-                    radius: [15]
-                MDCard:
-                    orientation: "vertical"
-                    padding: "8dp"
-                    size_hint: 1,None
-                    height: "210dp"
-                    elevation_radius: 20
-                    radius: [15]
 
         GridLayout:
             cols: 4
@@ -83,11 +68,13 @@
                     center_y: self.parent.center_y
             Button:
                 background_color: 0,0,0,0
+
                 Image:
                     id: Home
                     source: 'icons\Magnify.png'
                     center_x: self.parent.center_x
                     center_y: self.parent.center_y
+
 
 
 

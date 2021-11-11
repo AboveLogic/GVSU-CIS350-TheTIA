@@ -23,6 +23,7 @@
             size_hint_y: None
         MDTextFieldRound:
             id:user
+            write_tab: False
             hint_text: "email"
             icon_right: "account"
             size_int_x: None
@@ -32,6 +33,7 @@
 
         MDTextFieldRound:
             id:password
+            write_tab: False
             hint_text: "password"
             icon_right: "eye-off"
             size_int_x: None
@@ -62,6 +64,13 @@
             on_release:
                 app.root.current = "signup"
                 root.manager.transition.direction="left"
+        MDRoundFlatButton:
+            text: "DEBUG"
+            font_size: 12
+            pos_hint: {"center_x": 0.5}
+            on_release:
+                if root.debug(): app.root.current="main"; root.manager.transition.direction="left"
+                else: root.clear();
         MDLabel:
             text: ""
             size_hint_y: None
