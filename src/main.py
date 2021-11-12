@@ -1,5 +1,7 @@
 import pyrebase
+from kivy.core.image import Image
 from kivy.lang import Builder
+from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivymd.app import MDApp
@@ -8,6 +10,8 @@ from kivy.core.window import Window
 from firebase_admin import firestore
 import firebase_admin
 from firebase_admin import credentials
+from kivymd.uix.button import MDRectangleFlatButton
+from kivymd.uix.card import MDCard
 
 cred = credentials.Certificate("serviceAccountKey.json")
 firebase_admin.initialize_app(cred)
@@ -74,14 +78,17 @@ class MainWindow(Screen):
     def userId(self):
         print(auth.current_user['localId'])
     def addButton(self):
-        layout = GridLayout(cols=3)
-        layout.add_widget(Label(text='Test '))
-        self.ids.widget_list.add_widget(layout)
-        self.layouts.append(layout)
+        if(self.ids.search.text[0] == "#"):
+            word = userdb.collection("exercises").where("tags", "array_contains", self.ids.search.text).get()
+        else:
+            word = userdb.collection("exercises").where("name", "==", self.ids.search.text).get()
+        for words in word:
+            layout = Button(text = str(words.get('name')), size_hint_y = None, height = 100)
+            self.ids.widget_list.add_widget(layout)
+            self.layouts.append(layout)
     def delButton(self):
         for i in self.layouts:
             self.ids.widget_list.remove_widget(i)
-
 class WindowManager(ScreenManager):
     pass
 class KivyApp(MDApp):
