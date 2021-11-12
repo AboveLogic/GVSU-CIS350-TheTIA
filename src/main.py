@@ -62,14 +62,13 @@ class SignUpWindow(Screen):
             user = auth.sign_in_with_email_and_password(email, password)
             token = user['localId']
             print(token)
-            userdb.collection('users').document(token).set({'email': email})
+            userdb.collection('users').document(token).set({'email': email, 'password': password, 'bio':'','picture':''})
             print("Success!" + auth.current_user['localId'])
             return True
         except:
             print("Email already exists or invalid email")
             self.ids.invalid_email_label.text = "Email already exists or invalid email. Try again"
             return False
-
     def clear(self):
         self.ids.user.text = ""
         self.ids.password.text = ""
@@ -89,6 +88,8 @@ class MainWindow(Screen):
     def delButton(self):
         for i in self.layouts:
             self.ids.widget_list.remove_widget(i)
+    def addToWorkout(self):
+        pass
 class WindowManager(ScreenManager):
     pass
 class KivyApp(MDApp):
