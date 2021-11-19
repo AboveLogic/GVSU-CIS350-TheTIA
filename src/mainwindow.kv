@@ -4,8 +4,7 @@
         rows:4
         GridLayout:
             cols: 3
-            size_hint_y: .25
-
+            size_hint_y: .2
             Button:
                 text: "Settings"
             Button:
@@ -17,42 +16,94 @@
             Button:
                 text: "Profile"
                 on_release: root.userId()
-
-        ScrollView:
-            id: some
-            size: self.size
-            GridLayout:
-                id: widget_list
-                size_hint_y: None
-                height: self.minimum_height
-                width: self.minimum_width
-                cols: 1
-                spacing: 10
-                padding: 23
-                MDTextField:
-                    id:workout_name
-                    hint_text: "workout name"
-                    size_int_x: None
-                    width: 200
-                    font_size: 18
-                    pos_hint: {"center_x": 0.5}
-                    on_text_validate:
-                        root.delButton()
-                        root.addButton()
-                MDTextField:
-                    id:search
-                    hint_text: "search"
-                    size_int_x: None
-                    width: 200
-                    font_size: 18
-                    pos_hint: {"center_x": 0.5}
-                    on_text_validate:
-                        root.delButton()
-                        root.addButton()
-
+        GridLayout:
+            cols: 7
+            size_hint_y: .1
+            Button:
+                text: "Mon"
+                on_release:
+                    root.setDay("Monday")
+                    root.delButton()
+                    root.displayWorkout()
+            Button:
+                text: "Tue"
+                on_release:
+                    root.setDay("Tuesday")
+                    root.delButton()
+                    root.displayWorkout()
+            Button:
+                text: "Wed"
+                on_release:
+                    root.setDay("Wednesday")
+                    root.delButton()
+                    root.displayWorkout()
+            Button:
+                text: "Thur"
+                on_release:
+                    root.setDay("Thursday")
+                    root.delButton()
+                    root.displayWorkout()
+            Button:
+                text: "Fri"
+                on_release:
+                    root.setDay("Friday")
+                    root.delButton()
+                    root.displayWorkout()
+            Button:
+                text: "Sat"
+                on_release:
+                    root.setDay("Saturday")
+                    root.delButton()
+                    root.displayWorkout()
+            Button:
+                text: "Sun"
+                on_release:
+                    root.setDay("Sunday")
+                    root.delButton()
+                    root.displayWorkout()
+        GridLayout:
+            cols:1
+            ScreenManager:
+                id:manager
+                Screen:
+                    name: 'first'
+                    ScrollView:
+                        id: some2
+                        size: self.size
+                        GridLayout:
+                            id: widget_list
+                            size_hint_y: None
+                            height: self.minimum_height
+                            width: self.minimum_width
+                            cols: 1
+                            spacing: 10
+                            padding: 23
+                Screen:
+                    name: 'second'
+                    ScrollView:
+                        id: some
+                        size: self.size
+                        GridLayout:
+                            id: search_list
+                            size_hint_y: None
+                            height: self.minimum_height
+                            width: self.minimum_width
+                            cols: 1
+                            spacing: 10
+                            padding: 23
+                            MDTextField:
+                                id:search
+                                hint_text: "search"
+                                size_int_x: None
+                                width: 200
+                                font_size: 18
+                                pos_hint: {"center_x": 0.5}
+                                on_text_validate:
+                                    root.delButton()
+                                    root.addButton()
         GridLayout:
             cols: 4
-            size_hint_y: .25
+            size_hint_y: .2
             Button:
                 background_color: 0,0,0,0
                 Image:

@@ -26,7 +26,8 @@ firebaseConfig = {
 firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
 db = firebase.database()
-
+class SearchScreen(Screen):
+    pass
 class LoginWindow(Screen):
     def login(self):
         email = self.ids.user.text
@@ -58,6 +59,13 @@ class SignUpWindow(Screen):
             token = user['localId']
             print(token)
             userdb.collection('users').document(token).set({'email': email, 'password': password, 'bio':'','picture':''})
+            userdb.collection('users').document(token).collection('workouts').document("Monday").set({"name": "Monday",'yourExercises':{}}, merge = True)
+            userdb.collection('users').document(token).collection('workouts').document("Tuesday").set({"name": "Tuesday",'yourExercises':{}}, merge = True)
+            userdb.collection('users').document(token).collection('workouts').document("Wednesday").set({"name": "Wednesday",'yourExercises':{}}, merge = True)
+            userdb.collection('users').document(token).collection('workouts').document("Thursday").set({"name": "Thursday",'yourExercises':{}}, merge = True)
+            userdb.collection('users').document(token).collection('workouts').document("Friday").set({"name": "Friday",'yourExercises':{}}, merge = True)
+            userdb.collection('users').document(token).collection('workouts').document("Saturday").set({"name": "Saturday",'yourExercises':{}}, merge = True)
+            userdb.collection('users').document(token).collection('workouts').document("Sunday").set({"name": "Sunday",'yourExercises':{}}, merge = True)
             print("Success!" + auth.current_user['localId'])
             return True
         except:
@@ -69,27 +77,47 @@ class SignUpWindow(Screen):
         self.ids.password.text = ""
 class MainWindow(Screen):
     layouts = []
+    layouts2 = []
+    day = "Monday"
     def userId(self):
         print(auth.current_user['localId'])
+    def setDay(self, day):
+        self.day = day
     def addExercise(self,instance):
-        print(instance.text)
-        userdb.collection('users').document(auth.current_user['localId']).collection('workouts').document(self.ids.workout_name.text).set({instance.text: firestore.ArrayUnion(['reps', 'sets'])}, merge = True)
-        # userdb.collection('users').document(auth.current_user['localId']).update({'workout': firestore.ArrayUnion([instance.text])})
+        userdb.collection('users').document(auth.current_user['localId']).collection('workouts').document(self.day).set({
+            "yourExercises": {
+                instance.text: {
+                'reps' : "",
+                'sets': ""}}}, merge = True)
+    def displayWorkout(self):
+        print("THIS IS WORKING")
+        word = userdb.collection("users").document(auth.current_user['localId']).collection('workouts').where("name" ,"==" ,self.day).get()
+        print(word)
+        for words in word:
+            txt = words.get("yourExercises")
+            for txts in txt:
+                button = Button(text=txts, size_hint_y=None, height=100)
+                self.ids.widget_list.add_widget(button)
+                self.layouts.append(button)
+        add_button = Button(text = "add",size_hint_y=None, height=100)
+        self.ids.widget_list.add_widget(add_button)
+        self.layouts.append(add_button)
     def addButton(self):
+        searchText = self.ids.search.text.lower()
         if(self.ids.search.text[0] == "#"):
-            word = userdb.collection("exercises").where("tags", "array_contains", self.ids.search.text).get()
+                word = userdb.collection("exercises").where("tags", "array_contains", searchText).get()
         else:
-            word = userdb.collection("exercises").where("name", "==", self.ids.search.text).get()
+            word = userdb.collection("exercises").where("name", "==", searchText).get()
         for words in word:
             txt = str(words.get('name'))
             button = Button(text = txt, size_hint_y = None, height = 100,on_press=self.addExercise)
-            self.ids.widget_list.add_widget(button)
-            self.layouts.append(button)
+            self.ids.search_list.add_widget(button)
+            self.layouts2.append(button)
     def delButton(self):
         for i in self.layouts:
             self.ids.widget_list.remove_widget(i)
-    def addToWorkout(self):
-        pass
+        for i in self.layouts2:
+            self.ids.search_list.remove_widget(i)
 class WindowManager(ScreenManager):
     pass
 class KivyApp(MDApp):

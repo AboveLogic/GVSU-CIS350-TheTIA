@@ -46,7 +46,9 @@
             text: "CREATE ACCOUNT"
             font_size: 12
             pos_hint: {"center_x": 0.5}
-            on_release: app.root.current="main" if root.create_account() else root.clear()
+            on_release:
+                app.root.current="main" if root.create_account() else "signup"
+                root.clear()
 
         MDRoundFlatButton:
             text: "CLEAR"
