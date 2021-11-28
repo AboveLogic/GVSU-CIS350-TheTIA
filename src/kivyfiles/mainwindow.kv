@@ -1,3 +1,4 @@
+#:import Factory kivy.factory.Factory
 <MainWindow>:
     name:"main"
     GridLayout:
@@ -10,7 +11,7 @@
             Button:
                 Image:
                     id: Home
-                    source: 'SmartStrength.png'
+                    source: 'icons/SmartStrength.png'
                     center_x: self.parent.center_x
                     center_y: self.parent.center_y
             Button:
@@ -25,48 +26,68 @@
                     root.setDay("Monday")
                     root.delButton()
                     root.displayWorkout()
+                    root.switchScreen("workout","left")
             Button:
                 text: "Tue"
                 on_release:
                     root.setDay("Tuesday")
                     root.delButton()
                     root.displayWorkout()
+                    root.switchScreen("workout","left")
             Button:
                 text: "Wed"
                 on_release:
                     root.setDay("Wednesday")
                     root.delButton()
                     root.displayWorkout()
+                    root.switchScreen("workout","left")
             Button:
                 text: "Thur"
                 on_release:
                     root.setDay("Thursday")
                     root.delButton()
                     root.displayWorkout()
+                    root.switchScreen("workout","left")
             Button:
                 text: "Fri"
                 on_release:
                     root.setDay("Friday")
                     root.delButton()
                     root.displayWorkout()
+                    root.switchScreen("workout","left")
             Button:
                 text: "Sat"
                 on_release:
                     root.setDay("Saturday")
                     root.delButton()
                     root.displayWorkout()
+                    root.switchScreen("workout","left")
             Button:
                 text: "Sun"
                 on_release:
                     root.setDay("Sunday")
                     root.delButton()
                     root.displayWorkout()
+                    root.switchScreen("workout","left")
         GridLayout:
             cols:1
             ScreenManager:
                 id:manager
                 Screen:
-                    name: 'first'
+                    name: 'favorites'
+                    ScrollView:
+                        id: faves
+                        size: self.size
+                        GridLayout:
+                            id: favorite_list
+                            size_hint_y: None
+                            height: self.minimum_height
+                            width: self.minimum_width
+                            cols: 1
+                            spacing: 10
+                            padding: 23
+                Screen:
+                    name: 'workout'
                     ScrollView:
                         id: some2
                         size: self.size
@@ -79,7 +100,7 @@
                             spacing: 10
                             padding: 23
                 Screen:
-                    name: 'second'
+                    name: 'search'
                     ScrollView:
                         id: some
                         size: self.size
@@ -91,6 +112,14 @@
                             cols: 1
                             spacing: 10
                             padding: 23
+                            MDRoundFlatButton:
+                                text: "BACK"
+                                font_size: 12
+                                pos_hint: {"left": 1, "top":1}
+                                on_release:
+                                    root.delButton()
+                                    root.displayWorkout()
+                                    root.switchScreen("workout","right")
                             MDTextField:
                                 id:search
                                 hint_text: "search"
@@ -113,6 +142,7 @@
                     center_y: self.parent.center_y
             Button:
                 background_color: 0,0,0,0
+                on_release: root.switchScreen('favorites',"left")
                 Image:
                     id: Heart
                     source: 'icons\Heart.png'
@@ -132,7 +162,45 @@
                     source: 'icons\Magnify.png'
                     center_x: self.parent.center_x
                     center_y: self.parent.center_y
-
-
-
+<P>:
+    id:pop
+    title: ""
+    separator_height: 0
+    size_hint: 0.8, 0.35
+    auto_dismiss: False
+    FloatLayout:
+        MDRoundFlatButton:
+            text: "Exit"
+            font_size: 12
+            pos_hint: {"right": 1, "top":1.1 }
+            on_release:
+                pop.dismiss()
+        Label:
+            text: "REPS:"
+            size_hint: 0.8,0.25
+            pos_hint: {"center_x": 0.5, "top":1}
+        MDTextFieldRound:
+            id: reps
+            size_hint: 0.8,0.2
+            pos_hint: {"center_x": 0.5, "y":.6}
+            width: 200
+            font_size: 18
+        Label:
+            text: "SETS:"
+            size_hint: 0.8,0.25
+            pos_hint: {"center_x": 0.5, "y":.42}
+        MDTextFieldRound:
+            id: sets
+            size_hint: 0.8,0.2
+            pos_hint: {"center_x": 0.5, "y":.27}
+            width: 200
+            font_size: 18
+        MDRoundFlatButton:
+            text: "DONE"
+            font_size: 12
+            pos_hint: {"center_x": 0.5, "y":.08}
+            on_release:
+                root.addExercise()
+                Factory.MainWindow().switchScreen("search","right")
+                pop.dismiss()
 

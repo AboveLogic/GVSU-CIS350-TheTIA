@@ -1,6 +1,11 @@
 import pyrebase
+from kivy.core.text import Label
 from kivy.lang import Builder
 from kivy.uix.button import Button
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.image import Image
+from kivy.uix.popup import Popup
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.core.window import Window
@@ -8,6 +13,7 @@ from firebase_admin import firestore
 import firebase_admin
 from firebase_admin import credentials
 from kivymd.uix.card import MDCard
+from kivymd.uix.label import MDLabel
 
 cred = credentials.Certificate("serviceAccountKey.json")
 firebase_admin.initialize_app(cred)
@@ -47,7 +53,6 @@ class LoginWindow(Screen):
     def debug(self):
         auth.sign_in_with_email_and_password("ian@mail.com", "123456")
         return True
-
 class SignUpWindow(Screen):
     def create_account(self):
         email = self.ids.user.text
@@ -75,33 +80,58 @@ class SignUpWindow(Screen):
     def clear(self):
         self.ids.user.text = ""
         self.ids.password.text = ""
+
+class P(Popup):
+    text = ""
+    day = ""
+    def addExercise(self):
+        if self.ids.reps.text != "" and self.ids.sets.text != "":
+            userdb.collection('users').document(auth.current_user['localId']).collection('workouts').document(self.day).set({
+                "yourExercises": {
+                    self.text: {
+                    'reps' :self.ids.reps.text ,
+                    'sets': self.ids.sets.text}}}, merge = True)
 class MainWindow(Screen):
+    def show_popup(self,txt, day):
+        pops = P()
+        pops.text = txt
+        pops.day = day
+        pops.open()
     layouts = []
     layouts2 = []
+    sets = 0
+    reps = 0
     day = "Monday"
     def userId(self):
         print(auth.current_user['localId'])
     def setDay(self, day):
         self.day = day
-    def addExercise(self,instance):
-        userdb.collection('users').document(auth.current_user['localId']).collection('workouts').document(self.day).set({
-            "yourExercises": {
-                instance.text: {
-                'reps' : "",
-                'sets': ""}}}, merge = True)
     def displayWorkout(self):
-        print("THIS IS WORKING")
         word = userdb.collection("users").document(auth.current_user['localId']).collection('workouts').where("name" ,"==" ,self.day).get()
-        print(word)
+        # print(word)
         for words in word:
+            # print(words)
             txt = words.get("yourExercises")
             for txts in txt:
-                button = Button(text=txts, size_hint_y=None, height=100)
-                self.ids.widget_list.add_widget(button)
-                self.layouts.append(button)
-        add_button = Button(text = "add",size_hint_y=None, height=100)
+                # print(txts)
+                card = MDCard(size_hint_y=None, height=100, padding=15)
+                label = MDLabel(text=txts)
+                image = Image(source = "icons\Weight.png")
+                button = Button(text="trash", size_hint_y = None,size_hint_x=None, width = 50, height=50)
+                card.add_widget(label)
+                card.add_widget(image)
+                card.add_widget(button)
+                self.ids.widget_list.add_widget(card)
+                self.layouts.append(card)
+        add_button = Button(text = "add",size_hint_y=None, height=100,on_press=lambda x:self.switchScreen("search","left"))
+        fav_button = Button(text="add to favorites", size_hint_y=None, height=100,on_press=lambda x: self.switchScreen("search", "left"))
         self.ids.widget_list.add_widget(add_button)
         self.layouts.append(add_button)
+    def addFavorite(self):
+        pass
+    def switchScreen(self,screen,dir):
+        self.ids.manager.current = screen
+        self.ids.manager.transition.direction=dir
     def addButton(self):
         searchText = self.ids.search.text.lower()
         if(self.ids.search.text[0] == "#"):
@@ -110,7 +140,7 @@ class MainWindow(Screen):
             word = userdb.collection("exercises").where("name", "==", searchText).get()
         for words in word:
             txt = str(words.get('name'))
-            button = Button(text = txt, size_hint_y = None, height = 100,on_press=self.addExercise)
+            button = Button(text = txt, size_hint_y = None, height = 100,on_press=lambda x:self.show_popup(txt,self.day))
             self.ids.search_list.add_widget(button)
             self.layouts2.append(button)
     def delButton(self):
@@ -124,8 +154,6 @@ class KivyApp(MDApp):
     def build(self):
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "BlueGray"
-        return Builder.load_file('new_window.kv')
-
-
+        return Builder.load_file('kivyfiles/new_window.kv')
 if __name__ == '__main__':
     KivyApp().run()
