@@ -142,7 +142,10 @@
                     center_y: self.parent.center_y
             Button:
                 background_color: 0,0,0,0
-                on_release: root.switchScreen('favorites',"left")
+                on_release:
+                    root.switchScreen('favorites',"left")
+                    root.delButton()
+                    root.displayFavorites("SOMENAME")
                 Image:
                     id: Heart
                     source: 'icons\Heart.png'
@@ -203,4 +206,33 @@
                 root.addExercise()
                 Factory.MainWindow().switchScreen("search","right")
                 pop.dismiss()
-
+<namePopup>:
+    id:namepop
+    title: ""
+    separator_height: 0
+    size_hint: 0.6, 0.2
+    auto_dismiss: False
+    FloatLayout:
+        MDRoundFlatButton:
+            text: "Exit"
+            font_size: 12
+            pos_hint: {"right": 1, "top":1.1 }
+            on_release:
+                namepop.dismiss()
+        Label:
+            text: "NAME:"
+            size_hint: 0.8,0.25
+            pos_hint: {"center_x": 0.5, "top":1}
+        MDTextFieldRound:
+            id: name
+            size_hint: 0.8,0.2
+            pos_hint: {"center_x": 0.5, "y":.5}
+            width: 200
+            font_size: 18
+        MDRoundFlatButton:
+            text: "DONE"
+            font_size: 12
+            pos_hint: {"center_x": 0.5, "y":.08}
+            on_release:
+                namepop.dismiss()
+                Factory.MainWindow().addFavorite(name.text)
