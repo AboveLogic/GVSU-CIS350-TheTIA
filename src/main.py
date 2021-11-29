@@ -98,6 +98,33 @@ class MainWindow(Screen):
         self.day = day
     def getDay(self):
         return self.day
+    def displayExploreList(self):
+        self.delButton()
+        word = userdb.collection("explore").get()
+        for w in word:
+            button = Button(text=w.id, size_hint_y=None, height=100,on_press=lambda x: self.displayExploreWorkout(x.text))
+            self.ids.explore_list.add_widget(button)
+            self.layout.append(button)
+        # print(word)
+    def displayExploreWorkout(self,text):
+        txt = userdb.collection("explore").document(text).get()
+        txt = txt.to_dict()
+        print(txt)
+        self.delButton()
+        back_button = MDRoundFlatButton(text="back", on_release=lambda x: self.displayExploreList())
+        self.ids.explore_list.add_widget(back_button)
+        self.layout.append(back_button)
+        for i in txt:
+            reps = txt[i]["reps"]
+            sets = txt[i]["sets"]
+            card = MDCard(size_hint_y=None, height=100, padding=15)
+            ex = i.replace("_", " ") + ":" + reps + "X" + sets
+            label = MDLabel(text=ex)
+            image = Image(source="icons\Weight.png")
+            card.add_widget(label)
+            card.add_widget(image)
+            self.ids.explore_list.add_widget(card)
+            self.layout.append(card)
     def displayWorkout(self):
         word = userdb.collection("users").document(auth.current_user['localId']).collection('workouts').document(self.day).get()
         try:
@@ -125,7 +152,6 @@ class MainWindow(Screen):
             self.ids.widget_list.add_widget(fav_button)
             self.layout.append(fav_button)
     def displayFavoriteList(self):
-        print("diplayFavoriteList")
         word = userdb.collection("users").document(auth.current_user['localId']).collection('favorites').get()
         self.delButton()
         label = MDLabel(text="FAVORITE WORKOUTS")
@@ -136,7 +162,6 @@ class MainWindow(Screen):
             self.ids.favorite_list.add_widget(button)
             self.layout.append(button)
     def displayFavoriteWorkout(self,x):
-        print("displayFavoriteWorkout")
         txt = userdb.collection("users").document(auth.current_user['localId']).collection('favorites').document(x).get()
         txt = txt.to_dict()
         self.delButton()
@@ -185,6 +210,7 @@ class MainWindow(Screen):
             self.ids.widget_list.remove_widget(i)
             self.ids.search_list.remove_widget(i)
             self.ids.favorite_list.remove_widget(i)
+            self.ids.explore_list.remove_widget(i)
 class WindowManager(ScreenManager):
     pass
 class KivyApp(MDApp):

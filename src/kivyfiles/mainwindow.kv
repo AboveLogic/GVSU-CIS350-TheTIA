@@ -8,12 +8,11 @@
             size_hint_y: .2
             Button:
                 text: "Settings"
-            Button:
-                Image:
-                    id: Home
-                    source: 'icons/SmartStrength.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
+            Image:
+                id: Home
+                source: 'icons/SmartStrength.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
             Button:
                 text: "Profile"
                 on_release: root.userId()
@@ -74,6 +73,19 @@
             ScreenManager:
                 id:manager
                 Screen:
+                    name: 'explore'
+                    ScrollView:
+                        id: exp
+                        size: self.size
+                        GridLayout:
+                            id: explore_list
+                            size_hint_y: None
+                            height: self.minimum_height
+                            width: self.minimum_width
+                            cols: 1
+                            spacing: 10
+                            padding: 23
+                Screen:
                     name: 'favorites'
                     ScrollView:
                         id: faves
@@ -131,7 +143,7 @@
                                     root.delButton()
                                     root.addButton()
         GridLayout:
-            cols: 4
+            cols: 3
             size_hint_y: .2
             Button:
                 background_color: 0,0,0,0
@@ -158,18 +170,15 @@
                     center_y: self.parent.center_y
             Button:
                 background_color: 0,0,0,0
-                Image:
-                    id: Plus
-                    source: 'icons\Plus.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-            Button:
-                background_color: 0,0,0,0
+                on_release:
+                    root.switchScreen('explore',"left")
+                    root.displayExploreList()
                 Image:
                     id: Magnify
                     source: 'icons\Magnify.png'
                     center_x: self.parent.center_x
                     center_y: self.parent.center_y
+
 <P>:
     id:pop
     title: ""
