@@ -135,6 +135,11 @@
             size_hint_y: .2
             Button:
                 background_color: 0,0,0,0
+                on_release:
+                    root.setDay("Monday")
+                    root.delButton()
+                    root.displayWorkout()
+                    root.switchScreen("workout","right")
                 Image:
                     id: Home
                     source: 'icons\Home-icon.png'
@@ -145,7 +150,7 @@
                 on_release:
                     root.switchScreen('favorites',"left")
                     root.delButton()
-                    root.displayFavorites("SOMENAME")
+                    root.displayFavoriteList()
                 Image:
                     id: Heart
                     source: 'icons\Heart.png'
@@ -235,4 +240,4 @@
             pos_hint: {"center_x": 0.5, "y":.08}
             on_release:
                 namepop.dismiss()
-                Factory.MainWindow().addFavorite(name.text)
+                Factory.MainWindow().addFavorite(name.text,root.getDay())
