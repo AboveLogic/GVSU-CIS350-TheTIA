@@ -15,7 +15,8 @@
                 center_y: self.parent.center_y
             Button:
                 text: "Profile"
-                on_release: root.userId()
+                on_release:
+                    root.userId()
         GridLayout:
             cols: 7
             size_hint_y: .1
@@ -24,80 +25,54 @@
                 on_release:
                     root.setDay("Monday")
                     root.delButton()
-                    root.displayWorkout()
+                    root.displayWorkout("workout","Monday")
                     root.switchScreen("workout","left")
             Button:
                 text: "Tue"
                 on_release:
                     root.setDay("Tuesday")
                     root.delButton()
-                    root.displayWorkout()
+                    root.displayWorkout("workout","Tuesday")
                     root.switchScreen("workout","left")
             Button:
                 text: "Wed"
                 on_release:
                     root.setDay("Wednesday")
                     root.delButton()
-                    root.displayWorkout()
+                    root.displayWorkout("workout","Wednesday")
                     root.switchScreen("workout","left")
             Button:
                 text: "Thur"
                 on_release:
                     root.setDay("Thursday")
                     root.delButton()
-                    root.displayWorkout()
+                    root.displayWorkout("workout","Thursday")
                     root.switchScreen("workout","left")
             Button:
                 text: "Fri"
                 on_release:
                     root.setDay("Friday")
                     root.delButton()
-                    root.displayWorkout()
+                    root.displayWorkout("workout","Friday")
                     root.switchScreen("workout","left")
             Button:
                 text: "Sat"
                 on_release:
                     root.setDay("Saturday")
                     root.delButton()
-                    root.displayWorkout()
+                    root.displayWorkout("workout","Saturday")
                     root.switchScreen("workout","left")
             Button:
                 text: "Sun"
                 on_release:
                     root.setDay("Sunday")
                     root.delButton()
-                    root.displayWorkout()
+                    root.displayWorkout("workout","Sunday")
                     root.switchScreen("workout","left")
         GridLayout:
             cols:1
             ScreenManager:
                 id:manager
-                Screen:
-                    name: 'explore'
-                    ScrollView:
-                        id: exp
-                        size: self.size
-                        GridLayout:
-                            id: explore_list
-                            size_hint_y: None
-                            height: self.minimum_height
-                            width: self.minimum_width
-                            cols: 1
-                            spacing: 10
-                            padding: 23
-                Screen:
-                    name: 'favorites'
-                    ScrollView:
-                        id: faves
-                        size: self.size
-                        GridLayout:
-                            id: favorite_list
-                            size_hint_y: None
-                            height: self.minimum_height
-                            width: self.minimum_width
-                            cols: 1
-                            spacing: 10
-                            padding: 23
                 Screen:
                     name: 'workout'
                     ScrollView:
@@ -130,7 +105,8 @@
                                 pos_hint: {"left": 1, "top":1}
                                 on_release:
                                     root.delButton()
-                                    root.displayWorkout()
+                                    root.displayWorkout("workout",root.getDay())
+                                    root.displayWorkout("workout",root.getDay())
                                     root.switchScreen("workout","right")
                             MDTextField:
                                 id:search
@@ -141,7 +117,7 @@
                                 pos_hint: {"center_x": 0.5}
                                 on_text_validate:
                                     root.delButton()
-                                    root.addButton()
+                                    root.addSearchedButton()
         GridLayout:
             cols: 3
             size_hint_y: .2
@@ -150,7 +126,7 @@
                 on_release:
                     root.setDay("Monday")
                     root.delButton()
-                    root.displayWorkout()
+                    root.displayWorkout("workout","Monday")
                     root.switchScreen("workout","right")
                 Image:
                     id: Home
@@ -160,9 +136,9 @@
             Button:
                 background_color: 0,0,0,0
                 on_release:
-                    root.switchScreen('favorites',"left")
                     root.delButton()
-                    root.displayFavoriteList()
+                    root.switchScreen("workout","left")
+                    root.displayList("favorite")
                 Image:
                     id: Heart
                     source: 'icons\Heart.png'
@@ -171,8 +147,8 @@
             Button:
                 background_color: 0,0,0,0
                 on_release:
-                    root.switchScreen('explore',"left")
-                    root.displayExploreList()
+                    root.switchScreen("workout","left")
+                    root.displayList("explore")
                 Image:
                     id: Magnify
                     source: 'icons\Magnify.png'
@@ -249,4 +225,4 @@
             pos_hint: {"center_x": 0.5, "y":.08}
             on_release:
                 namepop.dismiss()
-                Factory.MainWindow().addFavorite(name.text,root.getDay())
+                Factory.MainWindow().addFavorite(name.text,root.getLocation(),root.getDay(),"workout")
