@@ -48,11 +48,12 @@ class SignUpWindow(Screen):
     def create_account(self):
         email = self.ids.user.text
         password = self.ids.password.text
+        bio = self.ids.bio.text
         try:
             auth.create_user_with_email_and_password(email, password)
             user = auth.sign_in_with_email_and_password(email, password)
             token = user['localId']
-            userdb.collection('users').document(token).set({'email': email, 'password': password, 'bio':'','picture':''})
+            userdb.collection('users').document(token).set({'email': email, 'password': password, 'bio': bio,'picture':''})
             return True
         except:
             self.ids.invalid_email_label.text = "Email already exists or invalid email. Try again"
@@ -60,6 +61,7 @@ class SignUpWindow(Screen):
     def clear(self):
         self.ids.user.text = ""
         self.ids.password.text = ""
+        self.ids.bio.text = ""
 class P(Popup):
     def addExercise(self):
         if self.ids.reps.text != "" and self.ids.sets.text != "":
