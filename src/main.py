@@ -62,6 +62,16 @@ class SignUpWindow(Screen):
         self.ids.user.text = ""
         self.ids.password.text = ""
         self.ids.bio.text = ""
+class ProfileWindow(Screen):
+    def displayEmail(self):
+        return ""
+    def displayBio(self):
+        return ""
+    def sendReset(self):
+        auth.send_password_reset_email((userdb.collection('users').document(auth.current_user['localId']).get().to_dict()["email"]))
+        self.ids.passwordreset.text = "Password Reset Email Has Been Sent!"
+    def clearText(self):
+        self.ids.passwordreset.text = ""
 class P(Popup):
     def addExercise(self):
         if self.ids.reps.text != "" and self.ids.sets.text != "":
