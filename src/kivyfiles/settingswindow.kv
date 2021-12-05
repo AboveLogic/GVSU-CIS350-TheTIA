@@ -1,0 +1,21 @@
+<SettingsWindow>:
+    name:"settings"
+    MDCard:
+        size_hint:None, None
+        size: root.width, root.height
+        padding: 25
+        spacing: 25
+        orientation: 'vertical'
+        MDLabel:
+            id: profile_label
+            text: "Your Smart Strength Settings"
+            font_size: 25
+            halign: 'center'
+            size_hint_y: None
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        MDRoundFlatButton:
+            text: "Exit and Save Changes"
+            font_size: 12
+            pos_hint: {"center_x": 0.5}
+            on_release:
+                app.root.current="main"; root.manager.transition.direction="left"

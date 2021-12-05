@@ -72,6 +72,9 @@ class ProfileWindow(Screen):
         self.ids.passwordreset.text = "Password Reset Email Has Been Sent!"
     def clearText(self):
         self.ids.passwordreset.text = ""
+
+class SettingsWindow(Screen):
+    pass
 class P(Popup):
     def addExercise(self):
         if self.ids.reps.text != "" and self.ids.sets.text != "":

@@ -8,6 +8,8 @@
             size_hint_y: .2
             Button:
                 text: "Settings"
+                on_release:
+                    app.root.current="settings"; root.manager.transition.direction="right"
 
             Image:
                 id: Home
