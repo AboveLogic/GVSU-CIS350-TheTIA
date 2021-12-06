@@ -111,7 +111,7 @@ class MainWindow(Screen):
     layout = []
     day = "Monday"
     def userId(self):
-        print(auth.current_user['localId'])
+        print(userdb.collection("users").document(auth.current_user['localId']).get().to_dict())
     def setDay(self, day):
         self.day = day
     def getDay(self):
@@ -163,13 +163,13 @@ class MainWindow(Screen):
                 self.ids.widget_list.add_widget(fav_button)
                 self.layout.append(fav_button)
         if(location == "favorite"):
-            trash_button = Button(text = "trash",size_hint_y= None, height=100, on_release= lambda x:self.deleteWorkout(text))
+            trash_button = Button(text = "trash",size_hint_y= None, height=100, on_release= lambda x:self.deleteWorkout(text,x))
             self.ids.widget_list.add_widget(trash_button)
             self.layout.append(trash_button)
-    def deleteWorkout(self,workout):
-        print(self.show_dictionaries("favorite").document(workout).delete())
+    def deleteWorkout(self,workout,button):
+        self.show_dictionaries("favorite").document(workout).delete()
         self.delButton()
-        self.displayWorkout("favorite",workout)
+        self.displayList("favorite")
     def deleteExercise(self,workout,text):
         self.ids.widget_list.remove_widget(workout)
         userdb.collection("users").document(auth.current_user['localId']).collection('workouts').document(self.day).update({text.replace(" ","_"):firestore.DELETE_FIELD})
