@@ -14,6 +14,13 @@
             size_hint_y: None
             pos_hint: {"center_x": 0.5, "center_y": 0.5}
         MDRoundFlatButton:
+            text: "Change Theme"
+            font_size: 12
+            pos_hint: {"center_x": 0.5}
+            on_release:
+                app.theme_cls.theme_style = "Light"
+                app.theme_cls.primary_palette = "Teal"
+        MDRoundFlatButton:
             text: "Exit and Save Changes"
             font_size: 12
             pos_hint: {"center_x": 0.5}

@@ -7,9 +7,14 @@
             cols: 3
             size_hint_y: .2
             Button:
-                text: "Settings"
+                background_color: 0,0,0,0
                 on_release:
                     app.root.current="settings"; root.manager.transition.direction="right"
+                Image:
+                    id: Settings
+                    source: 'icons\Settings Icon.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
 
             Image:
                 id: Home
@@ -17,9 +22,14 @@
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
             Button:
-                text: "Profile"
+                background_color: 0,0,0,0
                 on_release:
                     app.root.current="profile"
+                Image:
+                    id: Profile
+                    source: 'icons\Profile Icon4.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
         GridLayout:
             cols: 7
             size_hint_y: .1

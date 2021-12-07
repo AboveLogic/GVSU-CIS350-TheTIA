@@ -75,6 +75,7 @@ class ProfileWindow(Screen):
 
 class SettingsWindow(Screen):
     pass
+
 class P(Popup):
     def addExercise(self):
         if self.ids.reps.text != "" and self.ids.sets.text != "":
