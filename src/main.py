@@ -1,5 +1,8 @@
+import weakref
+
 import pyrebase
 from kivy.lang import Builder
+from kivy.properties import StringProperty
 from kivy.uix.button import Button
 from kivy.uix.image import Image
 from kivy.uix.popup import Popup
@@ -12,6 +15,8 @@ from firebase_admin import credentials
 from kivymd.uix.button import MDRoundFlatButton
 from kivymd.uix.card import MDCard
 from kivymd.uix.label import MDLabel
+from kivymd.uix.textfield import MDTextFieldRect
+
 firebaseConfig = {
     'apiKey': "AIzaSyCLaRtvwLMheJOJU2BrRtRAef_ogPn0yrQ",
     'authDomain': "smartstrength-ae966.firebaseapp.com",
@@ -62,16 +67,7 @@ class SignUpWindow(Screen):
         self.ids.user.text = ""
         self.ids.password.text = ""
         self.ids.bio.text = ""
-class ProfileWindow(Screen):
-    def displayEmail(self):
-        return ""
-    def displayBio(self):
-        return ""
-    def sendReset(self):
-        auth.send_password_reset_email((userdb.collection('users').document(auth.current_user['localId']).get().to_dict()["email"]))
-        self.ids.passwordreset.text = "Password Reset Email Has Been Sent!"
-    def clearText(self):
-        self.ids.passwordreset.text = ""
+
 
 class SettingsWindow(Screen):
     pass
@@ -189,20 +185,45 @@ class MainWindow(Screen):
         self.ids.manager.current = screen
         self.ids.manager.transition.direction=dir
     def addSearchedButton(self):
-        searchText = list(self.ids.search.text.lower().replace(" ","_"))
+        searchText = self.ids.search.text.lower()
+        lst = []
         if(self.ids.search.text[0] == "#"):
-                word = userdb.collection("exercises").where("tags", "array_contains", "".join(searchText)).get()
+            lst = searchText.split(" ")
+            word = userdb.collection("exercises").where("tags", "array_contains", lst[0]).get()
         else:
+            searchText = self.ids.search.text.lower().replace(" ", "_")
             word = userdb.collection("exercises").where("name", "==", "".join(searchText)).get()
         for words in word:
-            txt = str(words.get('name').replace("_", " "))
-            button = Button(text = txt, size_hint_y = None, height = 100,on_press=lambda x:self.show_popup(x.text,self.day))
-            self.ids.search_list.add_widget(button)
-            self.layout.append(button)
+            print(lst)
+            workout = words.to_dict()["tags"]
+            if(all(x in workout for x in lst)):
+                print(workout)
+                txt = str(words.get('name').replace("_", " "))
+                button = Button(text = txt, size_hint_y = None, height = 100,on_press=lambda x:self.show_popup(x.text,self.day))
+                self.ids.search_list.add_widget(button)
+                self.layout.append(button)
     def delButton(self):
         for i in self.layout:
             self.ids.widget_list.remove_widget(i)
             self.ids.search_list.remove_widget(i)
+class ProfileWindow(Screen):
+    def on_enter(self):
+        self.clear()
+        txt = str(userdb.collection('users').document(auth.current_user['localId']).get().to_dict()["email"])
+        email = MDLabel(text = "EMAIL: " + txt,halign= 'center')
+        txt = str(userdb.collection('users').document(auth.current_user['localId']).get().to_dict()["bio"])
+        bio = MDLabel(text="Bio: " + txt, halign= 'center')
+        self.ids.profile_info.add_widget(email)
+        self.ids.profile_info.add_widget(bio)
+    def clear(self):
+        self.ids.profile_info.clear_widgets()
+    def changeBio(self):
+        userdb.collection('users').document(auth.current_user['localId']).update({'bio': self.ids.edit_bio.text})
+    def sendReset(self):
+        auth.send_password_reset_email((userdb.collection('users').document(auth.current_user['localId']).get().to_dict()["email"]))
+        self.ids.passwordreset.text = "Password Reset Email Has Been Sent!"
+    def clearText(self):
+        self.ids.passwordreset.text = ""
 class WindowManager(ScreenManager):
     pass
 class KivyApp(MDApp):
