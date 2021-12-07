@@ -58,7 +58,7 @@ class SignUpWindow(Screen):
             auth.create_user_with_email_and_password(email, password)
             user = auth.sign_in_with_email_and_password(email, password)
             token = user['localId']
-            userdb.collection('users').document(token).set({'email': email, 'password': password, 'bio': bio,'picture':'','color':''})
+            userdb.collection('users').document(token).set({'email': email, 'password': password, 'bio': bio,'picture':'','color':'Dark'})
             return True
         except:
             self.ids.invalid_email_label.text = "Email already exists or invalid email. Try again"
