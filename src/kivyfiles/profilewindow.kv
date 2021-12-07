@@ -20,8 +20,13 @@
             id: profile_info
             size_hint_y: .75
             rows: 4
-        MDTextFieldRect:
+        MDTextField:
+            hint_text: "Edit Bio"
+            multiline: True
+            mode: "fill"
+            fill_color: 0, 0, 0, .4
             id: edit_bio
+            pos_hint_y: None
             on_text_validate: root.changeBio()
         AnchorLayout:
             size_hint_y: None

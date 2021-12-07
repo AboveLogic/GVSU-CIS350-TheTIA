@@ -1,8 +1,11 @@
 #:import Factory kivy.factory.Factory
 <MainWindow>:
     name:"main"
+    on_enter:
+        app.theme_cls.theme_style = root.getColor()
     GridLayout:
         rows:4
+
         GridLayout:
             cols: 3
             size_hint_y: .2
@@ -13,14 +16,17 @@
                 Image:
                     id: Settings
                     source: 'icons\Settings Icon.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-
+                    y: self.parent.y
+                    x: self.parent.x
+                    size: self.parent.size
+                    stretch: True
             Image:
-                id: Home
+                id: Logo
                 source: 'icons/SmartStrengthLogo10.png'
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
+                y: self.parent.y
+                x: self.parent.x
+                size: self.parent.size
+                stretch: True
             Button:
                 background_color: 0,0,0,0
                 on_release:
@@ -28,54 +34,112 @@
                 Image:
                     id: Profile
                     source: 'icons\Profile Icon4.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
+                    y: self.parent.y
+                    x: self.parent.x
+                    size: self.parent.size
+                    stretch: True
         GridLayout:
             cols: 7
             size_hint_y: .1
             Button:
+                background_color: "#69a858"
+                background_normal:""
                 text: "Mon"
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        width: 2
+                        rectangle: self.x, self.y, self.width, self.height
                 on_release:
                     root.setDay("Monday")
                     root.delButton()
                     root.displayWorkout("workout","Monday")
                     root.switchScreen("workout","left")
             Button:
+                background_color: "#69a858"
+                background_normal:""
                 text: "Tue"
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        width: 2
+                        rectangle: self.x, self.y, self.width, self.height
                 on_release:
                     root.setDay("Tuesday")
                     root.delButton()
                     root.displayWorkout("workout","Tuesday")
                     root.switchScreen("workout","left")
             Button:
+                background_color: "#69a858"
+                background_normal:""
                 text: "Wed"
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        width: 2
+                        rectangle: self.x, self.y, self.width, self.height
                 on_release:
                     root.setDay("Wednesday")
                     root.delButton()
                     root.displayWorkout("workout","Wednesday")
                     root.switchScreen("workout","left")
             Button:
+                background_color: "#69a858"
+                background_normal:""
                 text: "Thur"
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        width: 2
+                        rectangle: self.x, self.y, self.width, self.height
                 on_release:
                     root.setDay("Thursday")
                     root.delButton()
                     root.displayWorkout("workout","Thursday")
                     root.switchScreen("workout","left")
             Button:
+                background_color: "#69a858"
+                background_normal:""
                 text: "Fri"
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        width: 2
+                        rectangle: self.x, self.y, self.width, self.height
                 on_release:
                     root.setDay("Friday")
                     root.delButton()
                     root.displayWorkout("workout","Friday")
                     root.switchScreen("workout","left")
             Button:
+                background_color: "#69a858"
+                background_normal:""
                 text: "Sat"
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        width: 2
+                        rectangle: self.x, self.y, self.width, self.height
                 on_release:
                     root.setDay("Saturday")
                     root.delButton()
                     root.displayWorkout("workout","Saturday")
                     root.switchScreen("workout","left")
             Button:
+                background_color: "#69a858"
+                background_normal:""
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        width: 2
+                        rectangle: self.x, self.y, self.width, self.height
                 text: "Sun"
                 on_release:
                     root.setDay("Sunday")
@@ -112,7 +176,7 @@
                             cols: 1
                             spacing: 10
                             padding: 23
-                            MDRoundFlatButton:
+                            MDFillRoundFlatButton:
                                 text: "BACK"
                                 font_size: 12
                                 pos_hint: {"left": 1, "top":1}
@@ -144,10 +208,13 @@
                 Image:
                     id: Home
                     source: 'icons\Home-icon.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
+                    y: self.parent.y * self.parent.height * self.parent.width/self.image_ratio
+                    x: self.parent.x
+                    size: self.parent.size
+                    stretch: True
             Button:
                 background_color: 0,0,0,0
+                size_hint_y:1
                 on_release:
                     root.delButton()
                     root.switchScreen("workout","left")
@@ -155,8 +222,10 @@
                 Image:
                     id: Heart
                     source: 'icons\Heart.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
+                    y: self.parent.y * self.parent.height * self.parent.width/self.image_ratio
+                    x: self.parent.x
+                    size: self.parent.size
+                    stretch: True
             Button:
                 background_color: 0,0,0,0
                 on_release:
@@ -165,8 +234,10 @@
                 Image:
                     id: Magnify
                     source: 'icons\Magnify.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
+                    y: self.parent.y * self.parent.height * self.parent.width/self.image_ratio
+                    x: self.parent.x
+                    size: self.parent.size
+                    stretch: True
 
 <P>:
     id:pop

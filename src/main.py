@@ -12,7 +12,7 @@ from kivy.core.window import Window
 from firebase_admin import firestore
 import firebase_admin
 from firebase_admin import credentials
-from kivymd.uix.button import MDRoundFlatButton
+from kivymd.uix.button import MDRoundFlatButton, MDFillRoundFlatButton
 from kivymd.uix.card import MDCard
 from kivymd.uix.label import MDLabel
 from kivymd.uix.textfield import MDTextFieldRect
@@ -58,7 +58,7 @@ class SignUpWindow(Screen):
             auth.create_user_with_email_and_password(email, password)
             user = auth.sign_in_with_email_and_password(email, password)
             token = user['localId']
-            userdb.collection('users').document(token).set({'email': email, 'password': password, 'bio': bio,'picture':''})
+            userdb.collection('users').document(token).set({'email': email, 'password': password, 'bio': bio,'picture':'','color':''})
             return True
         except:
             self.ids.invalid_email_label.text = "Email already exists or invalid email. Try again"
@@ -70,8 +70,8 @@ class SignUpWindow(Screen):
 
 
 class SettingsWindow(Screen):
-    pass
-
+    def changeColor(self,color):
+        userdb.collection('users').document(auth.current_user['localId']).update({'color':color})
 class P(Popup):
     def addExercise(self):
         if self.ids.reps.text != "" and self.ids.sets.text != "":
@@ -88,6 +88,8 @@ class namePopup(Popup):
         print(self.location)
         return self.location
 class MainWindow(Screen):
+    def getColor(self):
+        return userdb.collection("users").document(auth.current_user['localId']).get().to_dict()['color']
     def show_dictionaries(self,type):
         if(type == "favorite"):
             return userdb.collection("users").document(auth.current_user['localId']).collection('favorites')
@@ -125,7 +127,7 @@ class MainWindow(Screen):
         txt = txt.to_dict()
         self.delButton()
         if(location == "explore" or location == "favorite"):
-            back_button = MDRoundFlatButton(text="back", on_release=lambda x: self.displayList(location))
+            back_button = MDFillRoundFlatButton(text="back", on_release=lambda x: self.displayList(location))
             self.ids.widget_list.add_widget(back_button)
             self.layout.append(back_button)
         if(txt != None):
@@ -212,7 +214,7 @@ class ProfileWindow(Screen):
         txt = str(userdb.collection('users').document(auth.current_user['localId']).get().to_dict()["email"])
         email = MDLabel(text = "EMAIL: " + txt,halign= 'center')
         txt = str(userdb.collection('users').document(auth.current_user['localId']).get().to_dict()["bio"])
-        bio = MDLabel(text="Bio: " + txt, halign= 'center')
+        bio = MDLabel(text="Bio: " + txt, halign= 'center',pos_hint={None,None})
         self.ids.profile_info.add_widget(email)
         self.ids.profile_info.add_widget(bio)
     def clear(self):
@@ -229,7 +231,7 @@ class WindowManager(ScreenManager):
 class KivyApp(MDApp):
     def build(self):
         self.theme_cls.theme_style = "Dark"
-        self.theme_cls.primary_palette = "BlueGray"
+        self.theme_cls.primary_palette = "Green"
         return Builder.load_file('kivyfiles/new_window.kv')
 if __name__ == '__main__':
     KivyApp().run()

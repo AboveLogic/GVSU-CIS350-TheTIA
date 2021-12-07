@@ -6,14 +6,13 @@
         padding: 25
         spacing: 25
         orientation:'vertical'
-
         MDLabel:
             id: welcome_label
             text: "Please Enter An Email And A Password"
             font_size: 40
             halign: 'center'
             size_hint_y: None
-            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            pos_hint: {"center_x": 0.5, "top": 1}
         MDLabel:
             id: invalid_email_label
             color: 1,0,0,1
@@ -21,7 +20,10 @@
             font_size: 20
             halign: 'center'
             size_hint_y: None
-        MDTextFieldRound:
+        MDTextField:
+            hint_text: "Fill mode"
+            mode: "fill"
+            fill_color: 0, 0, 0, .4
             id:user
             write_tab: False
             hint_text: "email"
@@ -30,8 +32,10 @@
             width: 200
             font_size: 18
             pos_hint: {"center_x": 0.5}
-
-        MDTextFieldRound:
+        MDTextField:
+            hint_text: "Fill mode"
+            mode: "fill"
+            fill_color: 0, 0, 0, .4
             id:password
             write_tab: False
             hint_text: "password (must be at least 6 characters)"
@@ -42,19 +46,23 @@
             pos_hint: {"center_x": 0.5}
             password: True
 
-        MDTextFieldRect:
+        MDTextField:
+            hint_text: "Fill mode"
+            mode: "fill"
+            fill_color: 0, 0, 0, .4
             id:bio
             write_tab: False
+            multiline: True
             hint_text: "Enter your bio here! A short description of yourself and your hobbies."
-            icon_right: "bio"
             size_int_x: None
+            size_hint_y: None
             width: 200
-            height: 30
-            color_mode: 'accent'
+            height: 10000000
+            max_text_length: 350
             font_size: 14
             pos_hint: {"center_x": 0.5}
 
-        MDRoundFlatButton:
+        MDFillRoundFlatButton:
             text: "CREATE ACCOUNT"
             font_size: 12
             pos_hint: {"center_x": 0.5}
@@ -62,20 +70,17 @@
                 app.root.current="main" if root.create_account() else "signup"
                 root.clear()
 
-        MDRoundFlatButton:
+        MDFillRoundFlatButton:
             text: "CLEAR"
             font_size: 12
             pos_hint: {"center_x": 0.5}
             on_release: root.clear()
 
-        MDRoundFlatButton:
+        MDFillRoundFlatButton:
             text: "BACK"
             font_size: 12
             pos_hint: {"center_x": 0.5}
             on_release:
                 app.root.current = "login"
                 root.manager.transition.direction="right"
-        MDLabel:
-            text: ""
-            size_hint_y: None
 

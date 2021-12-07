@@ -13,14 +13,22 @@
             halign: 'center'
             size_hint_y: None
             pos_hint: {"center_x": 0.5, "center_y": 0.5}
-        MDRoundFlatButton:
-            text: "Change Theme"
+        MDFillRoundFlatButton:
+            text: "Set Dark Mode"
+            font_size: 12
+            pos_hint: {"center_x": 0.5}
+            on_release:
+                app.theme_cls.theme_style = "Dark"
+                root.changeColor("Dark")
+        MDFillRoundFlatButton:
+            text: "Set Light Mode"
             font_size: 12
             pos_hint: {"center_x": 0.5}
             on_release:
                 app.theme_cls.theme_style = "Light"
-                app.theme_cls.primary_palette = "Teal"
-        MDRoundFlatButton:
+                root.changeColor("Light")
+
+        MDFillRoundFlatButton:
             text: "Exit and Save Changes"
             font_size: 12
             pos_hint: {"center_x": 0.5}

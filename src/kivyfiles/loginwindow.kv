@@ -21,7 +21,10 @@
             font_size: 20
             halign: 'center'
             size_hint_y: None
-        MDTextFieldRound:
+        MDTextField:
+            hint_text: "Fill mode"
+            mode: "fill"
+            fill_color: 0, 0, 0, .4
             id:user
             write_tab: False
             hint_text: "email"
@@ -31,7 +34,9 @@
             font_size: 18
             pos_hint: {"center_x": 0.5}
 
-        MDTextFieldRound:
+        MDTextField:
+            mode: "fill"
+            fill_color: 0, 0, 0, .4
             id:password
             write_tab: False
             hint_text: "password"
@@ -42,7 +47,7 @@
             pos_hint: {"center_x": 0.5}
             password: True
 
-        MDRoundFlatButton:
+        MDFillRoundFlatButton:
             text: "LOGIN"
             font_size: 12
             pos_hint: {"center_x": 0.5}
@@ -50,27 +55,24 @@
                 if root.login(): app.root.current="main"; root.manager.transition.direction="left"
                 else: root.clear();
 
-        MDRoundFlatButton:
+        MDFillRoundFlatButton:
             text: "CLEAR"
             font_size: 12
             pos_hint: {"center_x": 0.5}
             on_release: root.clear()
 
-        MDRoundFlatButton:
+        MDFillRoundFlatButton:
             text: "CREATE AN ACCOUNT"
             font_size: 12
             pos_hint: {"center_x": 0.5}
             on_release:
                 app.root.current = "signup"
                 root.manager.transition.direction="left"
-        MDRoundFlatButton:
+        MDFillRoundFlatButton:
             text: "DEBUG"
             font_size: 12
             pos_hint: {"center_x": 0.5}
             on_release:
                 if root.debug(): app.root.current="main"; root.manager.transition.direction="left"
                 else: root.clear();
-        MDLabel:
-            text: ""
-            size_hint_y: None
 
