@@ -1,7 +1,7 @@
 <ProfileWindow>:
     name:"profile"
     GridLayout:
-        rows:7
+        rows:8
         MDLabel:
             id: profile_label
             text: "Smart Strength Profile Editor"
@@ -44,6 +44,16 @@
                 pos_hint: {"center_x": 0.5}
                 on_release:
                     root.changeBio()
+        AnchorLayout:
+            size_hint_y: None
+            MDFillRoundFlatButton:
+                text: "Signout"
+                font_size: 12
+                pos_hint: {"center_x": 0.5}
+                on_release:
+                    root.signOut()
+                    app.root.current="login"; root.manager.transition.direction="down"
+                    root.clearText()
         AnchorLayout:
             size_hint_y: None
             MDFillRoundFlatButton:

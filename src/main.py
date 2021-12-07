@@ -67,8 +67,6 @@ class SignUpWindow(Screen):
         self.ids.user.text = ""
         self.ids.password.text = ""
         self.ids.bio.text = ""
-
-
 class SettingsWindow(Screen):
     def changeColor(self,color):
         userdb.collection('users').document(auth.current_user['localId']).update({'color':color})
@@ -217,6 +215,8 @@ class ProfileWindow(Screen):
         bio = MDLabel(text="Bio: " + txt, halign= 'center',pos_hint={None,None})
         self.ids.profile_info.add_widget(email)
         self.ids.profile_info.add_widget(bio)
+    def signOut(self):
+        auth.current_user = None
     def clear(self):
         self.ids.profile_info.clear_widgets()
     def changeBio(self):
