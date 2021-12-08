@@ -52,6 +52,7 @@
                 pos_hint: {"center_x": 0.5}
                 on_release:
                     root.signOut()
+                    app.theme_cls.theme_style = "Dark"
                     app.root.current="login"; root.manager.transition.direction="down"
                     root.clearText()
         AnchorLayout:
