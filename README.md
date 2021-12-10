@@ -16,4 +16,4 @@ In order to run our application, you must have Python 3.9 installed. It is also 
 3. Pyrebase4
 4. firebase-auth
 ## Run Instructions
-Once all prerequisites have been met, you are ready to run the program. You can simply click run to beign the program. The first run will ask for a run configuration, and it is very important that the script section (which determines what will be run) is the main.py file. You should navigate to wherever you stored the repositor, go to the src, and select main.py. After this, you are all set to run the application as you want. 
+Once all prerequisites have been met, you are ready to run the program. You can simply click run to beign the program. The first run will ask for a run configuration, and it is very important that the script section (which determines what will be run) is the main.py file. You should navigate to wherever you stored the repository, go to the src, and select main.py. After this, you are all set to run the application as you want. 
