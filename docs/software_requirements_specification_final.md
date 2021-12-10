@@ -53,9 +53,9 @@ NFR19. The reps and sets popup shall display in less than a second after choosin
 NFR20. The exercise shall not be added to the workout if the reps or sets text fields are empty.
 ## Software Aritfacts
 Below are the links to all of our previously created artifacts that contributed to the development of our project.
-[Presentation](http://https://github.com/AboveLogic/GVSU-CIS350-TheTIA/blob/master/docs/TIA%20Presentation%202.pdf "Presentation")
-[Use Case Diagrams](http://https://github.com/AboveLogic/GVSU-CIS350-TheTIA/tree/master/artifacts/use_case_diagrams "Use Case Diagrams")
-[Proposal](http://https://github.com/AboveLogic/GVSU-CIS350-TheTIA/blob/master/docs/proposal-template.md "Proposal")
-[Gantt Chart](http://https://github.com/AboveLogic/GVSU-CIS350-TheTIA/blob/master/docs/gantt_chart.drawio.png "Gantt Chart")
-[Original SRS](http://https://github.com/AboveLogic/GVSU-CIS350-TheTIA/blob/master/docs/software_requirements_specifications.md "Original SRS")
-[High Level Tasks](http://https://github.com/AboveLogic/GVSU-CIS350-TheTIA/blob/master/docs/high-level-tasks.md "High Level Tasks")
+1. [Presentation](http://https://github.com/AboveLogic/GVSU-CIS350-TheTIA/blob/master/docs/TIA%20Presentation%202.pdf "Presentation")
+2. [Use Case Diagrams](http://https://github.com/AboveLogic/GVSU-CIS350-TheTIA/tree/master/artifacts/use_case_diagrams "Use Case Diagrams")
+3. [Proposal](http://https://github.com/AboveLogic/GVSU-CIS350-TheTIA/blob/master/docs/proposal-template.md "Proposal")
+4. [Gantt Chart](http://https://github.com/AboveLogic/GVSU-CIS350-TheTIA/blob/master/docs/gantt_chart.drawio.png "Gantt Chart")
+5. [Original SRS](http://https://github.com/AboveLogic/GVSU-CIS350-TheTIA/blob/master/docs/software_requirements_specifications.md "Original SRS")
+6. [High Level Tasks](http://https://github.com/AboveLogic/GVSU-CIS350-TheTIA/blob/master/docs/high-level-tasks.md "High Level Tasks")
